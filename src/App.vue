@@ -1,32 +1,59 @@
 <template>
   <div id="app">
+    <h1>Transition demo</h1>
+
+    <!-- router view -->
+    <transition name="fade" mode="out-in">
+      <keep-alive :include="['Two']">
+        <router-view/>
+      </keep-alive>
+    </transition>
+
+    <!-- navigation -->
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">One</router-link> |
+      <router-link to="/two">Two</router-link>
     </nav>
-    <router-view/>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  font-family: sans-serif;
+  margin: 2rem;
 }
 
-nav {
-  padding: 30px;
+nav,
+* {
+  margin-bottom: 1rem;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 200px;
+  color: white;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.one {
+  background: red;
+}
+
+.two {
+  background: blue;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-enter-from,
+.fade-leave-to {
+  /* setting opacity at .1 to see any jump */
+  opacity: 0;
 }
 </style>
